@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
-
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }}</title>
     {% include meta.html %}
-
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:200,400|Open+Sans:300,400,700" rel="stylesheet">
+    <link href="/images/logo.png" rel="shortcut icon" type="image/png">
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
-
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
   </head>
-
   <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
-
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
+      <header>
+          <a href="/">
+              <img src="/images/logo.png" class="logo"/>
+  
+              <div class="title">{{ site.name }}</div>
+          </a>
+  
+          <div class="hamburger">
+              <span></span>
+              <span></span>
+              <span></span>
           </div>
+  
+          <div class="nav">
+              <a href="/"><section>Home</section></a>
+              <a href="/tag/analises"><section>Análises</section></a>
+              <a href="/tag/artigos"><section>Artigos</section></a>
+              <a href="/tag/prog-jams"><section>Prog Jams</section></a>
+              <a href="https://saliesbox.com"><section>Contato</section></a>
+          </div>
+      </header>
 
-          <nav>
-            <a href="{{ site.baseurl }}/">Blog</a>
-            <a href="{{ site.baseurl }}/about">About</a>
-          </nav>
-        </header>
+      <div id="main">
+          {{ content }}
       </div>
-    </div>
 
-    <div id="main" role="main" class="container">
-      {{ content }}
-    </div>
+      <footer>
+          Copyright {{ site.name }} © {{ "now" | date: "%Y" }}
+          <br>
+          Blog criado e mantido por <a href="https://saliesbox.com">Daniel Serezane</a> via Jekyll Now.
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR" target="_blank"><img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png" class="c-commons"></a>
+      </footer>
 
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
-        </footer>
-      </div>
-    </div>
-
-    {% include analytics.html %}
+      <script>
+        document.querySelector('.hamburger').addEventListener('click', function(){
+          document.querySelector('.nav').classList.toggle("display");
+        });
+      </script>
   </body>
 </html>

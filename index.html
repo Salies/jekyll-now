@@ -1,18 +1,111 @@
 ---
 layout: default
+image: /images/logo-100x100.png
 ---
 
-<div class="posts">
+  <div id="destak">
+    {% for post in site.posts %}
+    {% if post.big %}
+        <a href="{{ post.url }}">
+          <div class="big-c" style="background-image: url('{{ post.image }}')">
+            <div class="destak-title">
+                <span>
+                    {% assign m = post.date | date: "%-m" %}
+                    {{ post.date | date: "%-d " }}
+                    {% case m %}
+                      {% when '1' %}Jan
+                      {% when '2' %}Fev
+                      {% when '3' %}Mar
+                      {% when '4' %}Abr
+                      {% when '5' %}Mai
+                      {% when '6' %}Jun
+                      {% when '7' %}Jul
+                      {% when '8' %}Ago
+                      {% when '9' %}Set
+                      {% when '10' %}Out
+                      {% when '11' %}Nov
+                      {% when '12' %}Dez
+                    {% endcase %}
+                    {{ post.date | date: " %Y" }}
+                </span>
+                <br>
+                <span>{{ post.title }}</span>
+            </div>
+          </div>
+        </a>
+        {% break %}
+    {% endif %}
+    {% endfor %}
+
+    {% assign f = 0 %}
+    {% for post in site.posts %}
+      {% if post.featured %}
+        <a href="{{ post.url }}"><div class="small-c" style="background-image: url('{{ post.image }}')">
+            <div class="destak-title">
+                <span>
+                    {% assign m = post.date | date: "%-m" %}
+                    {{ post.date | date: "%-d " }}
+                    {% case m %}
+                      {% when '1' %}Jan
+                      {% when '2' %}Fev
+                      {% when '3' %}Mar
+                      {% when '4' %}Abr
+                      {% when '5' %}Mai
+                      {% when '6' %}Jun
+                      {% when '7' %}Jul
+                      {% when '8' %}Ago
+                      {% when '9' %}Set
+                      {% when '10' %}Out
+                      {% when '11' %}Nov
+                      {% when '12' %}Dez
+                    {% endcase %}
+                    {{ post.date | date: " %Y" }}
+                </span>
+                <br>
+                <span>{{ post.title }}</span>
+            </div>
+        </div></a>
+        {% assign f = f | plus:1 %}
+        {% if f == 2 %}
+          {% break %}
+        {% else %}
+          {% continue %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    </div>
+
+<div id="posts">
   {% for post in site.posts %}
-    <article class="post">
-
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-
-      <div class="entry">
-        {{ post.excerpt }}
+  <div class="post-preview">
+      <div class="post-preview-image" {% if post.thumb %} style="background-image: url('{{ post.thumb }}')" {% endif %}></div>
+      <div class="post-preview-wrapper"> 
+          <span class="post-preview-date"> <!--shoutouts to http://alanwsmith.com/jekyll-liquid-date-formatting-examples-->
+            {% assign m = post.date | date: "%-m" %}
+            {{ post.date | date: "%-d " }}
+            {% case m %}
+              {% when '1' %}Jan
+              {% when '2' %}Fev
+              {% when '3' %}Mar
+              {% when '4' %}Abr
+              {% when '5' %}Mai
+              {% when '6' %}Jun
+              {% when '7' %}Jul
+              {% when '8' %}Ago
+              {% when '9' %}Set
+              {% when '10' %}Out
+              {% when '11' %}Nov
+              {% when '12' %}Dez
+            {% endcase %}
+            {{ post.date | date: " %Y" }}
+          </span>
+          <br>
+          <a class="post-card-url" href="{{ post.url }}"><span class="post-preview-title">{{ post.title }}</span></a>
+          <br>
+          <span class="post-preview-text">{{ post.excerpt }}</span>
       </div>
-
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
+  </div>
   {% endfor %}
 </div>
+
+{% comment %} TODO: Posts that show up on featured do not show up on the normal feed. I could've already done it, but I'm not sure if I really want it. {% endcomment %}

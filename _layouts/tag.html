@@ -1,0 +1,41 @@
+---
+layout: default
+---
+
+<div class="tag-title">{{ page.title }}</div>
+<div id="posts">
+    {% for post in site.posts %}
+        {% if post.tag == page.tag %}
+        <div class="post-preview">
+            <div class="post-preview-image" {% if post.thumb %} style="background-image: url('{{ post.thumb }}')" {% endif %}>
+            </div>
+            <div class="post-preview-wrapper">
+                <span class="post-preview-date">
+                    <!--shoutouts to http://alanwsmith.com/jekyll-liquid-date-formatting-examples-->
+                    {% assign m = post.date | date: "%-m" %}
+                    {{ post.date | date: "%-d " }}
+                    {% case m %}
+                    {% when '1' %}Jan
+                    {% when '2' %}Fev
+                    {% when '3' %}Mar
+                    {% when '4' %}Abr
+                    {% when '5' %}Mai
+                    {% when '6' %}Jun
+                    {% when '7' %}Jul
+                    {% when '8' %}Ago
+                    {% when '9' %}Set
+                    {% when '10' %}Out
+                    {% when '11' %}Nov
+                    {% when '12' %}Dez
+                    {% endcase %}
+                    {{ post.date | date: " %Y" }}
+                </span>
+                <br>
+                <a class="post-card-url" href="{{ post.url }}"><span class="post-preview-title">{{ post.title }}</span></a>
+                <br>
+                <span class="post-preview-text">{{ post.excerpt }}</span>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
